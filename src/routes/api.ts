@@ -1,4 +1,4 @@
-import { Route } from "../bootstrap/fundation";
+import { Route } from "../bootstrap/foundation";
 import { Request, Response } from "express";
 
 
