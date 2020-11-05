@@ -2,6 +2,7 @@ import { Route } from "../bootstrap/foundation";
 import { Request, Response } from "express";
 
 
+
 Route.get('', (req: Request, res: Response) => {
 	return res.send('mantap')
 })
