@@ -1,8 +1,9 @@
 {
     "scripts": {
-        "watch": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node -r tsconfig-paths/register src/index.ts",
+        "watch": "npm run compiled:clear && nodemon --watch './src/**/*.ts' --ignore './src/**/*.spec.ts' --exec ts-node -r tsconfig-paths/register src/index.ts",
         "prod": "npm run production",
-        "production": "tsc",
+        "compiled:clear": "rm -rf dist && tsc",
+        "production": "rm -rf dist && tsc",
         "start": "npm run prod && node dist/index.js"
     },
     "name": "lara-express",
@@ -25,6 +26,6 @@
         "typescript-transform-paths": "^2.0.2"
     },
     "_moduleAliases": {
-        "@lara-express": "./dist/bootstrap/lara-express-app/"
+        "@lara-express": "./dist/bootstrap/lara-express/"
     }
 }

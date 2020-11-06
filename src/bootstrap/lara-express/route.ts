@@ -42,7 +42,6 @@ class RouteClass {
 		this.prefix_stack.push(trim(options.prefix, '/'))
 		if (typeof options.middleware !== 'undefined')
 			this.middleware_stack = [...this.middleware_stack, ...options.middleware]
-		console.log(this.middleware_stack)
 		return await new Promise((resolve, reject) => {
 			try {
 				callback()
@@ -62,6 +61,7 @@ class RouteClass {
 	 */
 	private handleRoute = (method: METHOD, prefix: string, ...handler: Array<RequestHandler>) => {
 		let fullPrefix = this.getFullPrefix(prefix)
+		handler = [...this.middleware_stack, ...handler]
 		switch (method) {
 			case 'GET':
 				this.routes.get(fullPrefix, ...handler)

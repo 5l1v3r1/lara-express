@@ -1,11 +1,18 @@
 import { Route } from "@lara-express";
 import { Request, Response, NextFunction } from "express";
 
+const mid = (req: Request, res: Response, next: NextFunction) => {
+  console.log('admin');
+  return next();
+};
 Route.get("", (req: Request, res: Response) => {
-  return res.send("mantap");
+  return res.send("mantappp");
 });
 
-Route.group({ prefix: "admin" }, () => {
+Route.group({
+  prefix: "admin",
+  middleware: [mid]
+}, () => {
   Route.get("", (req: Request, res: Response) => res.send("ok"));
   Route.group({ prefix: "test" }, () => {
     Route.get("work", (req: Request, res: Response) => res.send("buset"));
@@ -13,11 +20,6 @@ Route.group({ prefix: "admin" }, () => {
   Route.get("nice-work", (req: Request, res: Response) => res.send("mantap"));
 });
 
-const mid = (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.params);
-
-  return next();
-};
 Route.get("with/:id", mid, (req: Request, res: Response) =>
   res.send(req.params.id)
 );
