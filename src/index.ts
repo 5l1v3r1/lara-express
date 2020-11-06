@@ -1,8 +1,12 @@
+import 'module-alias/register';
+
 import { App } from "./bootstrap/app";
 import ApiRoutes from "./routes/api";
 
 
-const app =  new App();
+const app = new App();
 
 app.server.use(ApiRoutes.routes)
-app.server.listen(8080)
+
+let port = 8000
+app.server.listen(port, () => console.log(`Server running on port ${port}`))
