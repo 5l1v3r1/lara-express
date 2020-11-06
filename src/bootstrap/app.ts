@@ -29,7 +29,7 @@ export class App {
 
   pageNotFound = () => {
     Route.all("*", (req: Request, res: Response) =>
-      res.json({ code: 404, message: "404 Not Found" })
+      res.status(404).json({ code: 404, message: "404 Not Found" })
     );
   };
 }

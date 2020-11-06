@@ -1,5 +1,6 @@
 import 'module-alias/register';
 
+
 import { App } from "./bootstrap/app";
 import ApiRoutes from "./routes/api";
 

@@ -1,5 +1,6 @@
 import { Router, RequestHandler } from "express";
-import { trim, METHOD, GroupRoute } from '.'
+import { METHOD, GroupRoute } from '@lara-express'
+import { Str } from "@lara-express/helpers";
 
 
 class RouteClass {
@@ -39,7 +40,7 @@ class RouteClass {
 	 * @param callback 
 	 */
 	group = async (options: GroupRoute, callback: Function) => {
-		this.prefix_stack.push(trim(options.prefix, '/'))
+		this.prefix_stack.push(Str.trim(options.prefix, '/'))
 		if (typeof options.middleware !== 'undefined')
 			this.middleware_stack = [...this.middleware_stack, ...options.middleware]
 		return await new Promise((resolve, reject) => {
@@ -89,8 +90,7 @@ class RouteClass {
 	 * TODO: Menyatukan prefix stack dan prefix saat ini
 	 * @param prefix url
 	 */
-	private getFullPrefix = (prefix: string) => `/${this.prefix_stack.length > 0 ? this.prefix_stack.join('/') + '/' : ''}${trim(prefix, '/')}`
+	private getFullPrefix = (prefix: string) => `/${this.prefix_stack.length > 0 ? this.prefix_stack.join('/') + '/' : ''}${Str.trim(prefix, '/')}`
 }
-
 
 export const Route = new RouteClass()
